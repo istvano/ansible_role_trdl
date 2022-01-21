@@ -17,6 +17,3 @@ trdl_filename: 'trdl'
 
 # File name of the trdl executable in the redistributable file
 trdl_sig_filename: 'trdl.sig'
-
-# Dir where trdl should be installed
-trdl_install_dir: '/usr/local/bin'

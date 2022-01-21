@@ -50,17 +50,13 @@
   changed_when: false
 
 - name: create the trdl installation dir
-  become: yes
   file:
     state: directory
-    dest: '{{ trdl_install_dir }}'
+    path: "~/bin"
 
 - name: install trdl
-  become: yes
   copy:
     src: '{{ trdl_download_dir }}/{{ trdl_filename }}'
     remote_src: yes
-    dest: '{{ trdl_install_dir }}/{{ trdl_filename }}'
-    owner: root
-    group: root
+    dest: '~/bin/{{ trdl_filename }}'
     mode: 'u=rwx,go=rx'
