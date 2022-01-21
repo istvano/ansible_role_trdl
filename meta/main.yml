@@ -1,0 +1,25 @@
+---
+galaxy_info:
+  role_name: trdl
+  description: Ansible role for downloading and installing the trdl tool
+  author: Istvan Orban
+  license: MIT
+  min_ansible_version: 2.7
+  platforms:
+    - name: EL
+      versions:
+        - 7
+    - name: Ubuntu
+      versions:
+        - xenial
+        - bionic
+    - name: Debian
+      versions:
+        - jessie
+        - stretch
+  galaxy_tags:
+    - trdl
+    - kubernetes
+    - k8s
+    - development
+dependencies: []

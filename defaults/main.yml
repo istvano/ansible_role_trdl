@@ -1,0 +1,15 @@
+---
+# trdl version number
+trdl_version: '0.3.2'
+
+# Mirror to download the trdl from
+trdl_mirror: 'https://tuf.trdl.dev/targets/releases/{{ trdl_version }}'
+
+# Mirror to download the trdl from
+trdl_signature_mirror: 'https://tuf.trdl.dev/targets/signatures/{{ trdl_version }}'
+
+# Mirror to download the pgp file
+trdl_pgp_key: 'https://trdl.dev/trdl-client.asc'
+
+# Directory to store files downloaded for trdl
+trdl_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"

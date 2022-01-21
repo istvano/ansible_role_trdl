@@ -1,0 +1,22 @@
+---
+trdl_os: 'linux'
+
+trdl_platform: amd64
+
+# File name of the trdl download file
+trdl_redistribution_filename: '{{ trdl_os }}-{{trdl_platform}}/bin/trdl'
+
+# File name of the trdl sig file
+trdl_redistribution_filename_sign: '{{ trdl_os }}-{{trdl_platform}}/bin/trdl.sig'
+
+# Path of the staging dir
+trdl_staging_dir: '{{ trdl_download_dir }}/trdl-v{{ trdl_version }}-{{ trdl_os }}-{{ trdl_platform }}'
+
+# File name of the trdl executable in the redistributable file
+trdl_filename: 'trdl'
+
+# File name of the trdl executable in the redistributable file
+trdl_sig_filename: 'trdl.sig'
+
+# Dir where trdl should be installed
+trdl_install_dir: '/usr/local/bin'

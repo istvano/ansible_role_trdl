@@ -1,0 +1,66 @@
+---
+- name: create download directory for trdl installation
+  file:
+    state: directory
+    mode: 'u=rwx,go=rx'
+    dest: '{{ trdl_download_dir }}'
+
+- name: download trdl
+  get_url:
+    url: '{{ trdl_mirror }}/{{ trdl_redistribution_filename }}'
+    dest: '{{ trdl_download_dir }}/{{ trdl_filename }}'
+    force: no
+    use_proxy: yes
+    validate_certs: yes
+    mode: 'u=rw,go=r'
+
+- name: download trdl sig
+  get_url:
+    url: '{{ trdl_signature_mirror }}/{{ trdl_redistribution_filename_sign }}'
+    dest: '{{ trdl_download_dir }}/{{ trdl_sig_filename }}'
+    force: no
+    use_proxy: yes
+    validate_certs: yes
+    mode: 'u=rw,go=r'
+
+- name: Download gpg public key for validation
+  get_url:
+    url: '{{ trdl_pgp_key }}'
+    dest: '{{ trdl_download_dir }}/trdl.key'
+    force: no
+    use_proxy: yes
+    validate_certs: yes
+    mode: 'u=rw,go=r'
+
+- name: install unarchive module dependencies (apt, yum, dnf, zypper)
+  become: yes
+  package:
+    name:
+      - gpg
+    state: present
+  when: ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')
+
+- name: Import gpg public key for validation
+  command: "gpg --import {{ trdl_download_dir }}/trdl.key"
+  changed_when: false
+
+- name: verify gpg signature
+  command: "gpg --verify
+                {{ trdl_download_dir }}/{{ trdl_sig_filename }} {{ trdl_download_dir }}/{{ trdl_filename }}"
+  changed_when: false
+
+- name: create the trdl installation dir
+  become: yes
+  file:
+    state: directory
+    dest: '{{ trdl_install_dir }}'
+
+- name: install trdl
+  become: yes
+  copy:
+    src: '{{ trdl_download_dir }}/{{ trdl_filename }}'
+    remote_src: yes
+    dest: '{{ trdl_install_dir }}/{{ trdl_filename }}'
+    owner: root
+    group: root
+    mode: 'u=rwx,go=rx'
