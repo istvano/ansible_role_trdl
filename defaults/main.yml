@@ -1,6 +1,6 @@
 ---
 # trdl version number
-trdl_version: '0.3.2'
+trdl_version: '0.6.5'
 
 # Mirror to download the trdl from
 trdl_mirror: 'https://tuf.trdl.dev/targets/releases/{{ trdl_version }}'

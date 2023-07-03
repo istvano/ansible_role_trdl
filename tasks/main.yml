@@ -53,6 +53,7 @@
   file:
     state: directory
     path: "~/bin"
+    mode: 'u=rwx,go=rx'
 
 - name: install trdl
   copy:
